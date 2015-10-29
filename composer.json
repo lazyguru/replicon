@@ -1,0 +1,24 @@
+{
+    "name": "lazyguru/replicon-gen2",
+    "description": "Integrate with Replicon's Gen2 API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe Constant",
+            "email": "joe@joeconstant.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle-services": "~0.2",
+        "monolog/monolog": "1.6.0",
+        "guzzlehttp/log-subscriber": "~1.0",
+        "psr/log": "^1.0",
+        "lazyguru/base-api": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Constant\\Replicon\\Gen2\\": "src"
+        }
+    }
+}
