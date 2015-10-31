@@ -14,11 +14,11 @@
         "monolog/monolog": "1.6.0",
         "guzzlehttp/log-subscriber": "~1.0",
         "psr/log": "^1.0",
-        "lazyguru/base-api": "*"
+        "lazyguru/base-api": "~0.1"
     },
     "autoload": {
         "psr-4": {
-            "Constant\\Replicon\\Gen2\\": "src"
+            "Constant\\Replicon\\": "src"
         }
     }
 }
