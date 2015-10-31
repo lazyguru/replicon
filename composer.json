@@ -1,6 +1,6 @@
 {
-    "name": "lazyguru/replicon-gen2",
-    "description": "Integrate with Replicon's Gen2 API",
+    "name": "lazyguru/replicon",
+    "description": "Integrate with Replicon's Gen2 & Gen3 API",
     "license": "MIT",
     "authors": [
         {
