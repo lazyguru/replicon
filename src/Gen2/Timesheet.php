@@ -154,4 +154,14 @@ class Timesheet extends BaseService
             ]
         ];
     }
+
+    public function isGen2()
+    {
+        return true;
+    }
+
+    public function isGen3()
+    {
+        return false;
+    }
 }
