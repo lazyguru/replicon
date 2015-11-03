@@ -10,9 +10,6 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "guzzlehttp/guzzle-services": "~0.2",
-        "monolog/monolog": "1.6.0",
-        "guzzlehttp/log-subscriber": "~1.0",
         "psr/log": "^1.0",
         "lazyguru/base-api": "~0.1"
     },
