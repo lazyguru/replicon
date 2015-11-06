@@ -95,7 +95,29 @@ class Timesheet extends BaseSoapService
         $this->_options['location'] = $this->uri . '/soap';
         $response = $this->processRequest('PutStandardTimesheet2', $data);
         $this->_handleError($data, $response);
+        $this->recalculate();
         return $response;
+    }
+
+    public function recalculate()
+    {
+        $data = [
+            'RecalculateScriptData' => [
+                'timesheet' => [
+                    'uri' => "{$this->id}",
+                    'user' => null,
+                    'date' => null
+                ]
+            ]
+        ];
+
+        $this->output->debug(print_r($data, true));
+
+        $this->uri = $this->_baseUri . 'TimesheetService1.svc';
+        $this->wsdl = $this->uri . '?singleWsdl';
+        $this->_options['location'] = $this->uri . '/soap';
+        $response = $this->processRequest('RecalculateScriptData', $data);
+        $this->_handleError($data, $response);
     }
 
     public function createCell($date, $duration, $comment)
@@ -123,20 +145,24 @@ class Timesheet extends BaseSoapService
         ];
     }
 
-    public function addTimeRow($cells = [], $project = '', $task ='')
+    public function addTimeRow($cells = [], $project = '', $task ='', $billable = false)
     {
         if (empty($project) || empty($task)) {
             throw new \Exception("Project and Task are required.  Maybe you meant to use Gen2 class?");
+        }
+        $billingRate = null;
+        if ($billable) {
+            $billingRate = [
+                'displayText' => 'Project Rate',
+                'name' => 'Project Rate',
+                'uri' => 'urn:replicon:project-specific-billing-rate'
+            ];
         }
         $this->_timeRows[] = [
             'target' => null,
             'project' => $project,
             'task' => $task,
-            'billingRate' => [
-                'displayText' => 'Project Rate',
-                'name' => 'Project Rate',
-                'uri' => 'urn:replicon:project-specific-billing-rate'
-            ],
+            'billingRate' => $billingRate,
             'activity' => null,
             'customFieldValues' => [],
             'cells' => $cells
