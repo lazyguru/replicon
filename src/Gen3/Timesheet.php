@@ -260,14 +260,14 @@ class Timesheet extends BaseSoapService
         $this->_options['location'] = $this->uri . '/soap';
         $response = $this->processRequest('GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearch', $data);
         $this->_handleError($data, $response);
-        if (!property_exists($response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult, 'TimeAllocationAvailableTaskDetails1')) {
-             continue; // Handle for empty result
+        $tasks = [];
+        if (property_exists($response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult, 'TimeAllocationAvailableTaskDetails1')) {
+            $tasks = $response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult->TimeAllocationAvailableTaskDetails1;
         }
-        if (!is_array($response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult->TimeAllocationAvailableTaskDetails1)) {
-            $value = $response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult->TimeAllocationAvailableTaskDetails1;
-            $response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult->TimeAllocationAvailableTaskDetails1 = [$value];
+        if (!is_array($tasks)) {
+            $tasks = [$tasks];
         }
-        foreach ($response->GetPageOfTasksAvailableForTimeAllocationFilteredByProjectAndTextSearchResult->TimeAllocationAvailableTaskDetails1 as $task) {
+        foreach ($tasks as $task) {
             $taskCode = explode(' - ', $task->task->task->displayText);
             $this->_tasks[$projectUrn][trim($taskCode[1])] = $task->task->task->uri;
         }        
