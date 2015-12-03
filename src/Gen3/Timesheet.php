@@ -274,8 +274,8 @@ class Timesheet extends BaseSoapService
         if (isset($this->_tasks[$projectUrn])) {
             return $this->_tasks[$projectUrn];
         }
-
-        throw new \Exception("Could not find tasks for {$projectUrn}");
+        
+        return []; // no tasks found for project
     }
 
     protected function _getTaskUrn($taskCode)
