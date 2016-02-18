@@ -269,7 +269,7 @@ class Timesheet extends BaseSoapService
         }
         foreach ($tasks as $task) {
             $taskCode = explode(' - ', $task->task->task->displayText);
-            $this->_tasks[$projectUrn][trim($taskCode[1])] = $task->task->task->uri;
+            $this->_tasks[$projectUrn][trim($taskCode[count($taskCode) - 1])] = $task->task->task->uri;
         }        
         if (isset($this->_tasks[$projectUrn])) {
             return $this->_tasks[$projectUrn];
