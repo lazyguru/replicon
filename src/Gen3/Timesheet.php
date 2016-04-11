@@ -43,7 +43,11 @@ class Timesheet extends BaseSoapService
     {
         $this->output = $log;
         $companyKey = $options['companyKey'];
-        $this->_baseUri = "https://na6.replicon.com/{$companyKey}/services/";
+        $hostname = 'na8.replicon.com';
+        if (isset($options['hostname'])) {
+            $hostname = $options['hostname'];
+        }
+        $this->_baseUri = "https://{$hostname}/{$companyKey}/services/";
         $this->username = $username;
         $this->password = $password;
         // $this->_debug = true;
