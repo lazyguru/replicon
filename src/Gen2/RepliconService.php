@@ -16,8 +16,12 @@ class RepliconService extends BaseService
     {
         $this->output = $log;
         $companyKey = $options['companyKey'];
+        $hostname = 'na1.replicon.com';
+        if (isset($options['hostname'])) {
+            $hostname = $options['hostname'];
+        }
         $version = isset($options['version']) ? $options['version'] : '8.29.66';
-        $this->uri = "https://na1.replicon.com/{$companyKey}/RemoteApi/RemoteApi.ashx/{$version}/";
+        $this->uri = "https://{$hostname}/{$companyKey}/RemoteApi/RemoteApi.ashx/{$version}/";
         $this->username = $username;
         $this->password = $password;
 
